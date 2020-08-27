@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "fir-notification-783aa": {
+      "hosting": {
+        "notification-ws": [
+          "fir-notification-783aa"
+        ]
+      }
+    }
+  }
+}
