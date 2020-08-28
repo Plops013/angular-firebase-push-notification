@@ -6,7 +6,7 @@
   <p class="mb-0 pt-0 mt-0 pb-0 small text-danger">
     Attention, you must accept permission to receive notifications in browser!</p>
 </div>
-<div *ngIf="!isRegistered" class="row justify-content-center">
+<div *ngIf="!isRegistered" class="row justify-content-center m-0">
   <div class="col-lg-4">
     <form [formGroup]="nameForm" (submit)="onSubmit()">
       <div class="card">
@@ -25,14 +25,14 @@
     </form>
   </div>
 </div>
-<div *ngIf="isRegistered" class="row justify-content-center mt-3">
+<div *ngIf="isRegistered" class="row justify-content-center mt-3 m-0">
   <div class="col-lg-4">
     <div class="card text-center">
       <h3 class="py-3">Bem Vindo, <span class="text-center text-success">{{username}}</span></h3>
     </div>
   </div>
 </div>
-<div *ngIf="isRegistered" class="row justify-content-center">
+<div *ngIf="isRegistered" class="row justify-content-center m-0">
   <div class="col-lg-4">
     <form [formGroup]="pushForm" (submit)="sendPush()">
       <div class="card">
