@@ -17,7 +17,7 @@ const messaging = firebase.messaging();
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('firebase-messaging-sw.js')
+    navigator.serviceWorker.register('./firebase-messaging-sw.js')
     .then(() => {
       console.log('Service Worker Registered');
     }).catch((err) => {
