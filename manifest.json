@@ -1,6 +1,6 @@
 {
   "short_name": "FireBase Push Messaging",
   "name": "Angular FireBase Push Message",
-  "start_url": "/?utm_souce=homescreen",
+  "start_url": "/",
   "gcm_sender_id" : "103953800507"
 }

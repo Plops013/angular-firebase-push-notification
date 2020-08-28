@@ -1,5 +1,5 @@
-importScripts('https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/5.4.1/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/7.19.1/firebase-messaging.js');
 
 var firebaseConfig = {
   apiKey: "AIzaSyCtqy89josnfLzZiqtma0qsnJGNMPtF_Yo",
@@ -14,15 +14,7 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
-
-async function registerOnServer() {
-  const currentToken = await messaging.getToken();
-  fetch('https://firebase-notification.herokuapp.com/register', { method: 'post', body: currentToken });
-
-  messaging.onTokenRefresh(async () => {
-    console.log('token refreshed');
-    const newToken = await messaging.getToken();
-    fetch('https://firebase-notification.herokuapp.com/register', { method: 'post', body: currentToken });
-  });
-}
-registerOnServer();
+messaging.onBackgroundMessage(function (payload) {
+  const broadcast = new BroadcastChannel('messaging-sw');
+  broadcast.postMessage(payload);
+});
