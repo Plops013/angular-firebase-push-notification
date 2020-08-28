@@ -20,7 +20,7 @@ export class PushSwService {
   }
 
   private subscribeToJava(token: string) {
-    this.http.post('https://firebase-notification.herokuapp.com/register', token);
+    this.http.post('https://firebase-notification.herokuapp.com/register', token).subscribe();
     console.log('java token: ', token);
   }
 
@@ -28,12 +28,14 @@ export class PushSwService {
     const messages = new BehaviorSubject(null);
     const broadcast = new BroadcastChannel('messaging-sw');
     broadcast.onmessage = (event) => {
+      console.log(event);
       messages.next(event.data.notification);
     };
 
     this.fireMessaging.messages.subscribe(
       (data) => {
         messages.next((data as any).notification);
+        console.log(data);
       },
       err => console.log(err),
     );
