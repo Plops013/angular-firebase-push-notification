@@ -30,7 +30,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebase),
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production })
   ],
   providers: [PushSwService],
   bootstrap: [AppComponent]
