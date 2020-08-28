@@ -1,33 +1,42 @@
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/messaging';
-import { mergeMapTo } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PushSwService {
 
-  constructor(private fireMessaging: AngularFireMessaging, private http: HttpClient) { }
+  currentMessage = new BehaviorSubject(null);
 
-  public requestPermission() {
-    let currentToken = '';
-    this.fireMessaging.requestPermission.subscribe(
-      (token) => {
-        this.fireMessaging.getToken.subscribe(text => {
-          currentToken = text;
-          console.log('Permission granted! Save to the server! ', currentToken);
-          this.http.post('https://firebase-notification.herokuapp.com/register', currentToken).subscribe();
-        });
+  constructor(private fireMessaging: AngularFireMessaging, private http: HttpClient, private fireDataBase: AngularFireDatabase) {
+    this.fireMessaging.requestToken.pipe(
+      map(token => this.subscribeToJava(token))
+    ).subscribe();
+  }
 
+  private subscribeToJava(token: string) {
+    this.http.post('https://firebase-notification.herokuapp.com/register', token);
+    console.log('java token: ', token);
+  }
+
+  listenForMessages(): Observable<{}> {
+    const messages = new BehaviorSubject(null);
+    const broadcast = new BroadcastChannel('messaging-sw');
+    broadcast.onmessage = (event) => {
+      messages.next(event.data.notification);
+    };
+
+    this.fireMessaging.messages.subscribe(
+      (data) => {
+        messages.next((data as any).notification);
       },
-      (error) => { console.error(error); },
+      err => console.log(err),
     );
+    return messages;
   }
-
-  public getMessages() {
-    return this.fireMessaging.messages;
-  }
-
-
 }
