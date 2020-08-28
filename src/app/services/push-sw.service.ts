@@ -37,7 +37,7 @@ export class PushSwService {
       nickname,
       clientToken: token
     }).subscribe();
-    console.log('java token: ', token);
+    console.log('java refresh token: ', token);
   }
 
   private subscribeToJava(token: string, nickname: string) {
@@ -52,14 +52,18 @@ export class PushSwService {
     const messages = new BehaviorSubject(null);
     const broadcast = new BroadcastChannel('messaging-sw');
     broadcast.onmessage = (event) => {
-      console.log(event);
-      messages.next(event.data.notification);
+      messages.next({
+        ...event.data.notification,
+        link: event.data.fcmOptions.link
+      });
     };
 
     this.fireMessaging.messages.subscribe(
       (data) => {
-        messages.next((data as any).notification);
-        console.log(data);
+        messages.next({
+          ...(data as any).notification,
+          link: (data as any).fcmOptions.link
+        });
       },
       err => console.log(err),
     );

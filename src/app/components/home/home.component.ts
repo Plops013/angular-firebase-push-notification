@@ -22,7 +22,9 @@ export class HomeComponent implements OnInit {
 
   pushForm = new FormGroup({
     title: new FormControl(null, Validators.required),
-    message: new FormControl(null, Validators.required)
+    message: new FormControl(null, Validators.required),
+    nickname: new FormControl(null, Validators.required),
+    link: new FormControl(null)
   });
 
   ngOnInit(): void {
@@ -52,7 +54,8 @@ export class HomeComponent implements OnInit {
     const message = {
       title: this.pushForm.get('title').value,
       content: this.pushForm.get('message').value,
-      nickname: this.username
+      nickname: this.pushForm.get('nickname').value,
+      link: this.pushForm.get('link').value
     };
     this.push.sendMessage(message).subscribe(data => {
       this.loadingPush = false;

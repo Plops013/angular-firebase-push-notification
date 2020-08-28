@@ -1,5 +1,5 @@
-<app-notification [notifications]="notifications" (delete)="deleteNotification($event)"></app-notification>
-<h1 class="text-center">Firebase Push Notification</h1>
+<app-notification class="mx-0 my-0 py-0" [notifications]="notifications" (delete)="deleteNotification($event)"></app-notification>
+<h1 class="text-center mt-4">Firebase Push Notification</h1>
 <p class="text-center pb-0 mb-0">Example of use Firebase Cloud Messaging with <span class="text-primary">Angular</span>
   and <span class="text-primary">Spring Boot</span></p>
 <div class="text-center mb-0">
@@ -36,16 +36,28 @@
   <div class="col-lg-4">
     <form [formGroup]="pushForm" (submit)="sendPush()">
       <div class="card">
-        <div class="form-group mx-3 mt-2">
+        <div class="form-group mx-3 mt-1">
           <label for="name">Title: </label>
           <input formControlName="title"
             [class]="(pushForm.get('title').invalid && !pushForm.get('title').pristine) ? 'is-invalid form-control': ((!pushForm.get('title').pristine) ? 'is-valid form-control' : 'form-control')"
             id="name" type="text">
         </div>
-        <div class="form-group mx-3 mt-2">
+        <div class="form-group mx-3 mt-1">
           <label for="name">Message: </label>
           <input formControlName="message"
             [class]="(pushForm.get('message').invalid && !pushForm.get('message').pristine) ? 'is-invalid form-control': ((!pushForm.get('message').pristine) ? 'is-valid form-control' : 'form-control')"
+            id="name" type="text">
+        </div>
+        <div class="form-group mx-3 mt-1">
+          <label for="name">Nickname: </label>
+          <input formControlName="nickname"
+            [class]="(pushForm.get('nickname').invalid && !pushForm.get('nickname').pristine) ? 'is-invalid form-control': ((!pushForm.get('nickname').pristine) ? 'is-valid form-control' : 'form-control')"
+            id="name" type="text">
+        </div>
+        <div class="form-group mx-3 mt-1">
+          <label for="name">Some Url (Could Be Empty): </label>
+          <input formControlName="link"
+            [class]="(pushForm.get('link').invalid && !pushForm.get('link').pristine) ? 'is-invalid form-control': ((!pushForm.get('link').pristine) ? 'is-valid form-control' : 'form-control')"
             id="name" type="text">
         </div>
         <div class="form-group mx-3">
