@@ -8,6 +8,7 @@
       "resources": {
         "files": [
           "/favicon.ico",
+          "/firebase-messaging-sw.js",
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",

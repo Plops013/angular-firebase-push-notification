@@ -5,7 +5,7 @@
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
-  "scope": "./",
+  "scope": "./angular-firebase-push-notification/",
   "start_url": "./",
   "icons": [
     {

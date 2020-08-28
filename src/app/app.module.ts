@@ -32,7 +32,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     HttpClientModule,
     ServiceWorkerModule.register('firebase-messaging-sw.js', { enabled: environment.production })
   ],
-  providers: [PushSwService],
+  providers: [
+    PushSwService,
+    AngularFireModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

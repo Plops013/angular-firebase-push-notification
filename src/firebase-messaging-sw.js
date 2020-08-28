@@ -14,14 +14,18 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
+
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./firebase-messaging-sw.js')
-    .then(function(registration) {
-      console.log('Registration successful, scope is:', registration.scope);
-    }).catch(function(err) {
-      console.log('Service worker registration failed, error:', err);
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('firebase-messaging-sw.js')
+    .then(() => {
+      console.log('Service Worker Registered');
+    }).catch((err) => {
+      console.log('error to register Service Worker', err)
     });
-  }
+  });
+}
+
 messaging.onBackgroundMessage(function (payload) {
   const broadcast = new BroadcastChannel('messaging-sw');
   broadcast.postMessage(payload);
