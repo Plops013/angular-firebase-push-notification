@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1598636771289,
+  "timestamp": 1598637192927,
   "index": "/dist/notification-ws/index.html",
   "assetGroups": [
     {
@@ -16,8 +16,8 @@
         "/dist/notification-ws/favicon.ico",
         "/dist/notification-ws/firebase-messaging-sw.js",
         "/dist/notification-ws/index.html",
-        "/dist/notification-ws/main-es2015.9fea095c86dcdee599ba.js",
-        "/dist/notification-ws/main-es5.9fea095c86dcdee599ba.js",
+        "/dist/notification-ws/main-es2015.7add770ae8fff9c30bdf.js",
+        "/dist/notification-ws/main-es5.7add770ae8fff9c30bdf.js",
         "/dist/notification-ws/manifest.webmanifest",
         "/dist/notification-ws/polyfills-es2015.f332a089ad1600448873.js",
         "/dist/notification-ws/polyfills-es5.2237b5d0d7a85091411d.js",
@@ -62,9 +62,9 @@
     "/dist/notification-ws/combined-sw.js": "94ee71dff0bdb40066dfd2f27870a117b4cf6ef5",
     "/dist/notification-ws/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
     "/dist/notification-ws/firebase-messaging-sw.js": "29390752158fe758efd664856fa1505b11de9e9e",
-    "/dist/notification-ws/index.html": "873ed95b5825fe25707ed55f49dc8422e29b38c7",
-    "/dist/notification-ws/main-es2015.9fea095c86dcdee599ba.js": "3ae690c37940db53aea4ec5db7588f33a900dae2",
-    "/dist/notification-ws/main-es5.9fea095c86dcdee599ba.js": "19c33c21fd0067e058f581ecfde18a4352a34fc9",
+    "/dist/notification-ws/index.html": "0b68ba135a2cf78887f945a0cd64b2d5113b5410",
+    "/dist/notification-ws/main-es2015.7add770ae8fff9c30bdf.js": "0f4dc21e0bfe438fe16cdf7698c8bbe7e46ed945",
+    "/dist/notification-ws/main-es5.7add770ae8fff9c30bdf.js": "7af6f38a901d134c4cc7b130146d01d39d95f644",
     "/dist/notification-ws/manifest.webmanifest": "01ff77a05b100d589a52b057e2946ee846812175",
     "/dist/notification-ws/polyfills-es2015.f332a089ad1600448873.js": "72ad4ccc0a3916ae4598199447cdeadd6d380570",
     "/dist/notification-ws/polyfills-es5.2237b5d0d7a85091411d.js": "8aa26ea87b9958c6bd13b7c257c0e9940438e684",
