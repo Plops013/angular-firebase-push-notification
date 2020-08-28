@@ -1,6 +1,7 @@
 import { PushSwService } from './../../services/push-sw.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { skip } from 'rxjs/operators';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,19 @@ import { skip } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
 
   notifications: any[] = [];
+  username = '';
+  isRegistered = false;
+  loadingPush = false;
 
   constructor(private push: PushSwService, private cdRef: ChangeDetectorRef) { }
+  nameForm = new FormGroup({
+    name: new FormControl(null, Validators.required)
+  });
+
+  pushForm = new FormGroup({
+    title: new FormControl(null, Validators.required),
+    message: new FormControl(null, Validators.required)
+  });
 
   ngOnInit(): void {
     this.push.listenForMessages().pipe(skip(1)).subscribe(
@@ -27,6 +39,30 @@ export class HomeComponent implements OnInit {
   public deleteNotification(index: number) {
     this.notifications.splice(index, 1);
     this.cdRef.detectChanges();
+  }
+
+  public onSubmit() {
+    this.push.requestToken(this.nameForm.get('name').value);
+    this.isRegistered = true;
+    this.username = this.nameForm.get('name').value;
+  }
+
+  public sendPush(){
+    this.loadingPush = true;
+    const message = {
+      title: this.pushForm.get('title').value,
+      content: this.pushForm.get('message').value,
+      nickname: this.username
+    };
+    this.push.sendMessage(message).subscribe(data => {
+      this.loadingPush = false;
+    },
+    err => {
+      this.loadingPush = false;
+    },
+    () => {
+      this.loadingPush = false;
+    });
   }
 
 }

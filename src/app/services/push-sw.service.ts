@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, mergeMapTo } from 'rxjs/operators';
 
 
 @Injectable({
@@ -14,13 +14,37 @@ export class PushSwService {
   currentMessage = new BehaviorSubject(null);
 
   constructor(private fireMessaging: AngularFireMessaging, private http: HttpClient, private fireDataBase: AngularFireDatabase) {
-    this.fireMessaging.requestToken.pipe(
-      map(token => this.subscribeToJava(token))
-    ).subscribe();
   }
 
-  private subscribeToJava(token: string) {
-    this.http.post('https://firebase-notification.herokuapp.com/register', token).subscribe();
+  public sendMessage(message: any): Observable<any>{
+    return this.http.post<any>('https://firebase-notification.herokuapp.com/message', message);
+  }
+
+  public requestToken(nickname: string) {
+    this.fireMessaging.requestToken.pipe(
+      map(token => this.subscribeToJava(token, nickname))
+    ).subscribe();
+    this.fireMessaging.onTokenRefresh(() => {
+      this.fireMessaging.getToken.subscribe((refreshedToken) => {
+        console.log('Token refreshed.');
+        this.updateToken(refreshedToken, nickname);
+      });
+    });
+  }
+
+  private updateToken(token: string, nickname: string){
+    this.http.put('https://firebase-notification.herokuapp.com/token', {
+      nickname,
+      clientToken: token
+    }).subscribe();
+    console.log('java token: ', token);
+  }
+
+  private subscribeToJava(token: string, nickname: string) {
+    this.http.post('https://firebase-notification.herokuapp.com/token', {
+      nickname,
+      clientToken: token
+    }).subscribe();
     console.log('java token: ', token);
   }
 

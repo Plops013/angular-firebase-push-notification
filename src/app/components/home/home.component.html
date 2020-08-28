@@ -1,3 +1,62 @@
 <app-notification [notifications]="notifications" (delete)="deleteNotification($event)"></app-notification>
-<h1 class="text-center">Angular Push Notification</h1>
-<p class="text-center">Example of use Firebase Cloud Messaging with Angular</p>
+<h1 class="text-center">Firebase Push Notification</h1>
+<p class="text-center pb-0 mb-0">Example of use Firebase Cloud Messaging with <span class="text-primary">Angular</span>
+  and <span class="text-primary">Spring Boot</span></p>
+<div class="text-center mb-0">
+  <p class="mb-0 pt-0 mt-0 pb-0 small text-danger">
+    Attention, you must accept permission to receive notifications in browser!</p>
+</div>
+<div *ngIf="!isRegistered" class="row justify-content-center">
+  <div class="col-lg-4">
+    <form [formGroup]="nameForm" (submit)="onSubmit()">
+      <div class="card">
+        <div class="form-group mx-3 mt-2">
+          <label for="name">Name: </label>
+          <input formControlName="name"
+            [class]="(nameForm.get('name').invalid && !nameForm.get('name').pristine) ? 'is-invalid form-control': ((!nameForm.get('name').pristine) ? 'is-valid form-control' : 'form-control')"
+            id="name" type="text">
+        </div>
+        <div class="form-group mx-3">
+          <button [disabled]="nameForm.invalid"
+            [class]="nameForm.invalid ? 'btn btn-secondary btn-block':'btn btn-primary btn-block'">Register
+            Token</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="isRegistered" class="row justify-content-center mt-3">
+  <div class="col-lg-4">
+    <div class="card text-center">
+      <h3 class="py-3">Bem Vindo, <span class="text-center text-success">{{username}}</span></h3>
+    </div>
+  </div>
+</div>
+<div *ngIf="isRegistered" class="row justify-content-center">
+  <div class="col-lg-4">
+    <form [formGroup]="pushForm" (submit)="sendPush()">
+      <div class="card">
+        <div class="form-group mx-3 mt-2">
+          <label for="name">Title: </label>
+          <input formControlName="title"
+            [class]="(pushForm.get('title').invalid && !pushForm.get('title').pristine) ? 'is-invalid form-control': ((!pushForm.get('title').pristine) ? 'is-valid form-control' : 'form-control')"
+            id="name" type="text">
+        </div>
+        <div class="form-group mx-3 mt-2">
+          <label for="name">Message: </label>
+          <input formControlName="message"
+            [class]="(pushForm.get('message').invalid && !pushForm.get('message').pristine) ? 'is-invalid form-control': ((!pushForm.get('message').pristine) ? 'is-valid form-control' : 'form-control')"
+            id="name" type="text">
+        </div>
+        <div class="form-group mx-3">
+          <button [disabled]="pushForm.invalid || loadingPush"
+            [class]="pushForm.invalid ? 'btn btn-secondary btn-block':'btn btn-primary btn-block'">
+            <div *ngIf="loadingPush" class="spinner-border spinner-border-sm" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <p class="mx-0 px-0 my-0 py-0" *ngIf="!loadingPush">Send Push</p>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
