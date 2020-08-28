@@ -14,6 +14,13 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('firebase-messaging-sw.js')
+    .then(function (registration) {
+      console.log("Service Worker Registered");
+      messaging.useServiceWorker(registration);
+    });
+}
 messaging.onBackgroundMessage(function (payload) {
   const broadcast = new BroadcastChannel('messaging-sw');
   broadcast.postMessage(payload);
