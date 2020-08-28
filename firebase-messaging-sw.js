@@ -1,6 +1,8 @@
 importScripts('https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/7.19.1/firebase-messaging.js');
 
+serviceWorkerContainer.register()
+
 var firebaseConfig = {
   apiKey: "AIzaSyCtqy89josnfLzZiqtma0qsnJGNMPtF_Yo",
   authDomain: "fir-notification-783aa.firebaseapp.com",
