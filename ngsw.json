@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1598629858458,
+  "timestamp": 1598630073081,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -61,7 +61,7 @@
     "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/combined-sw.js": "94ee71dff0bdb40066dfd2f27870a117b4cf6ef5",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/firebase-messaging-sw.js": "ff5d4880cf7663f958aedda127b5daa13f481ae5",
+    "/firebase-messaging-sw.js": "67400df92dbff1affec4b022f287bf62ceb89299",
     "/index.html": "21fb277000fea116e118814c6d32c3762b1fe5ac",
     "/main-es2015.73d670e91baad8b8d0dd.js": "d38c14e8c5e82c26abb8ab099f523f69ec0686b7",
     "/main-es5.73d670e91baad8b8d0dd.js": "ed0427b815527972ed135f4af3a508217582dd2f",
